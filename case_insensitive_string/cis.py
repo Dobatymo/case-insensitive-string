@@ -11,6 +11,9 @@ class CaseInsensitiveString(object):
 	def __init__(self, s):
 		self._s = s
 
+	def __fspath__(self):
+		return self._s
+
 	def __repr__(self):
 		return "CaseInsensitiveString({})".format(repr(self._s))
 

@@ -6,7 +6,7 @@
         "depends": [],
         "name": "ccis",
         "sources": [
-            "ccis.pyx"
+            "case_insensitive_string/ccis.pyx"
         ]
     },
     "module_name": "ccis"
@@ -813,7 +813,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "ccis.pyx",
+  "case_insensitive_string\\ccis.pyx",
   "stringsource",
 };
 /* ForceInitThreads.proto */
