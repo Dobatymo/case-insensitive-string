@@ -1,7 +1,9 @@
 import itertools
 import sys
+
 from cpython.unicode cimport Py_UNICODE_TOLOWER
 from cython.view cimport array
+
 
 cdef extern from "Python.h":
 	cdef Py_ssize_t PY_SSIZE_T_MAX
