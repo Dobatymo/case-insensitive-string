@@ -1,3 +1,33 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+  "Cython==3.0.10",
+  "setuptools",
+]
+
+[project]
+name = "case-insensitive-string"
+version="0.0.1"
+description="A case-insensitive string class"
+readme = "README.md"
+license = {text = "ISC License"}
+authors = [
+  { name = "Dobatymo"}
+]
+requires-python = ">=3.7"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+  "typing-extensions>=4",
+]
+
 [tool.black]
 line-length = 120
 
@@ -13,3 +43,9 @@ allow_redefinition = true
 ignore_missing_imports = true
 warn_unused_configs = true
 warn_unused_ignores = true
+
+[tool.bandit]
+skips = ["B101"]
+
+[tool.cython-lint]
+max-line-length = 120

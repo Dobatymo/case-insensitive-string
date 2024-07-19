@@ -1,6 +1,6 @@
 from genutility.test import MyTestCase, parametrize
 
-from case_insensitive_string import CIS
+from case_insensitive_string.cis import CIS
 
 
 class CaseInsensitiveStringTest(MyTestCase):

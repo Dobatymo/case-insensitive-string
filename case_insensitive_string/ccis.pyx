@@ -1,8 +1,4 @@
-import itertools
-import sys
-
 from cpython.unicode cimport Py_UNICODE_TOLOWER
-from cython.view cimport array
 
 
 cdef extern from "Python.h":
@@ -26,7 +22,7 @@ cdef extern from "Python.h":
 
 cdef class CaseInsensitiveString(object):
 
-	cdef readonly str _s # how does this work without exposing to python
+	cdef readonly str _s  # how does this work without exposing to python
 	cdef Py_ssize_t hash
 
 	def __cinit__(self):
