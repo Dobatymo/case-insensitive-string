@@ -1,32 +1,46 @@
 [build-system]
 build-backend = "setuptools.build_meta"
 requires = [
-  "Cython==3.0.10",
+  "cython==3.0.11",
   "setuptools",
 ]
 
 [project]
 name = "case-insensitive-string"
-version="0.0.1"
-description="A case-insensitive string class"
+version = "0.0.1"
+description = "A case-insensitive string class"
 readme = "README.md"
-license = {text = "ISC License"}
+license = { text = "ISC License" }
 authors = [
-  { name = "Dobatymo"}
+  { name = "Dobatymo" },
 ]
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 classifiers = [
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: ISC License (ISCL)",
+  "Operating System :: OS Independent",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
   "typing-extensions>=4",
 ]
+optional-dependencies.test = [
+  "genutility[test]",
+]
+urls.Home = "https://github.com/Dobatymo/case-insensitive-string"
+
+[tool.setuptools]
+packages = [ "case_insensitive_string" ]
+
+[tool.cibuildwheel]
+test-extras = "test"
+test-command = "python -OO -m unittest discover -v -s {project}/tests -p *_test.py"
 
 [tool.black]
 line-length = 120
@@ -45,7 +59,8 @@ warn_unused_configs = true
 warn_unused_ignores = true
 
 [tool.bandit]
-skips = ["B101"]
+skips = [ "B101" ]
 
 [tool.cython-lint]
 max-line-length = 120
+ignore = [ "W191" ]

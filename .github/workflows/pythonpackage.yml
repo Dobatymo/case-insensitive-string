@@ -1,0 +1,64 @@
+name: Python package
+
+on:
+  push:
+    branches:
+    - '**'
+    tags-ignore:
+    - '**'
+    paths-ignore:
+    - .pre-commit-config.yaml
+  pull_request:
+  release:
+    types:
+    - published
+
+jobs:
+  build-wheels:
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, macos-13, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: 3.8
+    - name: Build
+      run: |
+        python -m pip install cibuildwheel==2.21.3
+        python -m cibuildwheel
+    - uses: actions/upload-artifact@v3
+      with:
+        path: wheelhouse/*.whl
+
+  build-sdist:
+    if: github.event_name == 'release' && github.event.action == 'published'
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: 3.8
+    - name: Build dists
+      run: |
+        python -m pip install build
+        python -m build --sdist
+    - uses: actions/upload-artifact@v3
+      with:
+        path: dist/*.tar.gz
+
+  upload-pypi:
+    if: github.event_name == 'release' && github.event.action == 'published'
+    needs: [build-wheels, build-sdist]
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/download-artifact@v3
+      with:
+        name: artifact
+        path: dist
+    - uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.pypi_password }}
